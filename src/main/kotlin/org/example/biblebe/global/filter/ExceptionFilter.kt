@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletResponse
 import org.example.biblebe.global.exception.ErrorResponse
 import org.example.biblebe.global.exception.GlobalBusinessException
 import org.example.biblebe.global.exception.GlobalErrorCode
-import org.example.biblebe.global.exception.InternalServerError
 import org.example.biblebe.global.exception.errorCode.ErrorProperty
 import org.springframework.http.MediaType
 import org.springframework.web.filter.OncePerRequestFilter
