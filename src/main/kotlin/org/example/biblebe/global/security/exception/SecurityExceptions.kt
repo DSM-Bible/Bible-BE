@@ -1,4 +1,7 @@
-package org.example.biblebe.global.security
+package org.example.biblebe.global.security.exception
 
-class SecurityExceptions {
-}
+import org.example.biblebe.global.exception.GlobalBusinessException
+
+object PasswordMismatchesException: GlobalBusinessException(
+        SecurityErrorCode.PASSWORD_MISMATCHES
+)

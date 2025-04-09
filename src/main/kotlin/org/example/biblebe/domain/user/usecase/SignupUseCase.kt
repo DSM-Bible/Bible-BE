@@ -1,6 +1,5 @@
 package org.example.biblebe.domain.user.usecase
 
-import jakarta.transaction.Transactional
 import org.example.biblebe.domain.user.dto.request.SignupRequestDto
 import org.example.biblebe.domain.user.entity.UserEntity
 import org.example.biblebe.domain.user.service.CheckUserService
@@ -8,6 +7,7 @@ import org.example.biblebe.domain.user.service.CommandUserService
 import org.example.biblebe.global.security.SecurityService
 import org.example.biblebe.global.thirdparty.s3.FileService
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 
 @Service

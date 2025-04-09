@@ -23,7 +23,14 @@ class ExceptionFilter(
             errorToJson(e.errorProperty, response)
         } catch (e: Exception) {
             e.printStackTrace()
-            errorToJson(GlobalErrorCode.INTERNAL_SERVER_ERROR, response)
+            when(e.cause) {
+                is GlobalBusinessException -> {
+                    errorToJson((e.cause as GlobalBusinessException).errorProperty, response)
+                }
+                else -> {
+                    errorToJson(GlobalErrorCode.INTERNAL_SERVER_ERROR, response)
+                }
+            }
         }
     }
 
