@@ -15,4 +15,8 @@ class CheckUserServiceImpl(
             throw UserIdAlreadyExistsException
         }
     }
+
+    override fun checkUserIdExistsResult(userId: String): Boolean {
+        return  userJpaRepository.existsById(userId)
+    }
 }
