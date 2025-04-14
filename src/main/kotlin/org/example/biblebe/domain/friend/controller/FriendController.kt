@@ -39,7 +39,7 @@ class FriendController(
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PutMapping("/accept")
+    @PatchMapping("/acceptance")
     fun acceptFriend(@RequestBody request: AddFriendRequest): ApiResponse<*> {
         friendAddDeleteService.setFriendUserTrue(request.friendId)
         return ApiResponse(
