@@ -19,5 +19,8 @@ class FriendEntity(
     @JoinColumn(name = "friend_id", nullable = false)
     val friend: UserEntity,
 
-    val isAccept: Boolean
+    var isAccept: Boolean,
+    
+    @Version
+    var version: Long = 0
 ) 

@@ -12,6 +12,9 @@ import org.example.biblebe.global.service.CurrentUserProvider
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.transaction.annotation.Isolation
+import org.springframework.orm.ObjectOptimisticLockingFailureException
+
 
 @Service
 class FriendAddDeleteServiceImpl(
@@ -20,7 +23,7 @@ class FriendAddDeleteServiceImpl(
     private val currentUserProvider: CurrentUserProvider
 ) : FriendAddDeleteService {
 
-    @Transactional
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun addFriend(friendId: String) {
         val currentUser = currentUserProvider.getCurrentUser()
         
@@ -38,26 +41,35 @@ class FriendAddDeleteServiceImpl(
         val friendEntity = FriendEntity(
             user = currentUser,
             friend = friendUser,
-            isAccept = true // 바로 수락 상태로 설정
+            isAccept = false
         )
-
+        
         friendRepository.save(friendEntity)
     }
 
     @Transactional
     override fun deleteFriend(friendId: String) {
         val currentUser = currentUserProvider.getCurrentUser()
-
-        val friendUser: UserEntity = try {
-            getUserService.getUserByUserId(friendId)
-        } catch (e: Exception) {
-            throw UserNotFoundException
-        }
-
+        
+        val friendUser: UserEntity = getUserService.getUserByUserId(friendId)
+        
         val existingFriend = friendRepository.findByUserAndFriend(currentUser, friendUser)
             ?: throw FriendException(FriendErrorCode.FRIEND_NOT_FOUND)
-
-        // 친구 관계 삭제
+        
         friendRepository.delete(existingFriend)
     }
+ 
+    @Transactional
+    override fun setFriendUserTrue(friendId: String) {
+        val currentUser = currentUserProvider.getCurrentUser()
+
+        val friendUser: UserEntity = getUserService.getUserByUserId(friendId)
+
+        val existingFriend = friendRepository.findByUserAndFriend(friendUser, currentUser)
+            ?: throw FriendException(FriendErrorCode.FRIEND_NOT_FOUND)
+
+        // 직접 엔티티 속성을 변경하는 대신 쿼리를 사용하여 업데이트
+        friendRepository.updateFriendAcceptStatus(existingFriend.id, true)
+    }
+
 } 

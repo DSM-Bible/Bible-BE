@@ -39,6 +39,17 @@ class FriendController(
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @PutMapping("/accept")
+    fun acceptFriend(@RequestBody request: AddFriendRequest): ApiResponse<*> {
+        friendAddDeleteService.setFriendUserTrue(request.friendId)
+        return ApiResponse(
+            status = "200 Ok",
+            message = "정상적으로 처리되었습니다",
+            data = EmptyResponse()
+        )
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping
     fun deleteFriend(@Validated @RequestBody request: AddFriendRequest): ApiResponse<EmptyResponse> {
         friendAddDeleteService.deleteFriend(request.friendId)
