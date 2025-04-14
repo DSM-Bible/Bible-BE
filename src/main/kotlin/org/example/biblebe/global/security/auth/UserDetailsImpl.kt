@@ -1,4 +1,4 @@
-package org.example.biblebe.global.security
+package org.example.biblebe.global.security.auth
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority

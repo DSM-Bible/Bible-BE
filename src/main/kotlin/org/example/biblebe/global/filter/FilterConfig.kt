@@ -1,13 +1,12 @@
 package org.example.biblebe.global.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.example.biblebe.global.security.JwtTokenProvider
+import org.example.biblebe.global.security.jwt.JwtTokenProvider
 import org.springframework.security.config.annotation.SecurityConfigurer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.web.DefaultSecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.stereotype.Component
-import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities.Private
 
 @Component
 class FilterConfig(

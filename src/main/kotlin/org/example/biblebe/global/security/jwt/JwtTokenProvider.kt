@@ -1,12 +1,13 @@
-package org.example.biblebe.global.security
+package org.example.biblebe.global.security.jwt
 
 import io.jsonwebtoken.*
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletRequest
+import org.example.biblebe.global.security.auth.UserDetailsImpl
+import org.example.biblebe.global.security.exception.TokenNotValidException
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 import java.nio.charset.StandardCharsets
 import java.util.*
@@ -33,14 +34,22 @@ class JwtTokenProvider(
     }
 
     fun getAuthentication(token: String): Authentication {
-        val claims = Jwts.parserBuilder()
-            .setSigningKey(key)
-            .build()
-            .parseClaimsJws(token)
-            .body
-
+        val claims = getClaim(token)
         val principal = UserDetailsImpl(claims.subject)
+
         return UsernamePasswordAuthenticationToken(principal, "", principal.authorities)
+    }
+
+    fun getClaim(token: String): Claims {
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .body
+        } catch (e: Exception) {
+            throw TokenNotValidException
+        }
     }
 
     fun validateToken(token: String): Boolean {

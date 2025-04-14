@@ -4,7 +4,7 @@ import org.example.biblebe.domain.user.dto.request.LoginRequestDto
 import org.example.biblebe.domain.user.dto.response.LoginResponseDto
 import org.example.biblebe.domain.user.entity.UserEntity
 import org.example.biblebe.domain.user.service.GetUserService
-import org.example.biblebe.global.security.JwtTokenProvider
+import org.example.biblebe.global.security.jwt.JwtTokenProvider
 import org.example.biblebe.global.security.SecurityService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
