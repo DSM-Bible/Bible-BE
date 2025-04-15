@@ -19,6 +19,7 @@ interface FriendRepository : CrudRepository<FriendEntity, UUID> {
     fun updateFriendAcceptStatus(@Param("id") id: UUID, @Param("isAccept") isAccept: Boolean)
 
     fun findAllByUser(user: UserEntity): List<FriendEntity>
+    fun findAllByFriend(user: UserEntity): List<FriendEntity>
     fun findAllByUserAndIsAcceptTrue(user: UserEntity): List<FriendEntity>
     fun findByUserAndFriend(user: UserEntity, friend: UserEntity): FriendEntity?
 } 

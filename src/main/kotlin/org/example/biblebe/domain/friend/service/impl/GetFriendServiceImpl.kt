@@ -21,13 +21,23 @@ class GetFriendServiceImpl(
     @Transactional(readOnly = true)
     override fun allFriends(): List<FriendResponse> {
         val currentUser = currentUserProvider.getCurrentUserId()
-        
-        return friendRepository.findAllByUserAndIsAcceptTrue(getUserService.getUserByUserId(currentUser))
+        val user = getUserService.getUserByUserId(currentUser)
+
+        return friendRepository.findAllByUser(user)
             .map { 
                 FriendResponse(
                     friend_id = it.friend.userId,
                     friend_name = it.friend.nickname,
-                    image_url = it.friend.profile ?: ""
+                    image_url = it.friend.profile ?: "",
+                    is_accepted = it.isAccept
+                )
+            } + friendRepository.findAllByFriend(user)
+            .map {
+                FriendResponse(
+                    friend_id = it.user.userId,
+                    friend_name = it.user.nickname,
+                    image_url = it.user.profile ?: "",
+                    is_accepted = it.isAccept
                 )
             }
     }
