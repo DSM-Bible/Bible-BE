@@ -59,7 +59,7 @@ class SecurityConfig(
                 authorize(HttpMethod.DELETE, "/friend", authenticated)
                 authorize(HttpMethod.GET, "/friend/list", authenticated)
                 authorize(HttpMethod.GET, "/friend/*", authenticated)
-                authorize(HttpMethod.PUT, "/friend/accept", authenticated)
+                authorize(HttpMethod.PUT, "/friend/acceptance", authenticated)
 
                 authorize(anyRequest, denyAll)
             }
