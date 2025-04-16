@@ -42,4 +42,27 @@ class GetFriendServiceImpl(
             }
     }
 
+    override fun selectFriendKeyWord(keyWord: String): List<FriendResponse> {
+        val currentUser = currentUserProvider.getCurrentUserId()
+        return friendRepository.getFriendByKeyWord(currentUser, keyWord)
+            ?.map {
+               if (it.friend.userId.equals(currentUser)){
+                   FriendResponse(
+                       friend_id = it.user.userId,
+                       friend_name = it.user.nickname,
+                       image_url = it.user.profile ?: "",
+                       is_accepted = it.isAccept
+                   )
+               } else{
+                   FriendResponse(
+                       friend_id = it.friend.userId,
+                       friend_name = it.friend.nickname,
+                       image_url = it.friend.profile ?: "",
+                       is_accepted = it.isAccept
+                   )
+               }
+
+            } ?: emptyList()
+    }
+
 } 

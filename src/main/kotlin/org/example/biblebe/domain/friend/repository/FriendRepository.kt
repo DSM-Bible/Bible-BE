@@ -18,6 +18,10 @@ interface FriendRepository : CrudRepository<FriendEntity, UUID> {
     @Query("UPDATE FriendEntity f SET f.isAccept = :isAccept WHERE f.id = :id")
     fun updateFriendAcceptStatus(@Param("id") id: UUID, @Param("isAccept") isAccept: Boolean)
 
+    @Modifying
+    @Query("SELECT f FROM FriendEntity f WHERE (f.user.userId = :userId AND f.friend.userId LIKE %:keyWord%) OR (f.friend.userId = :userId AND f.user.userId LIKE %:keyWord%)")
+    fun getFriendByKeyWord(userId: String, keyWord: String): List<FriendEntity>?
+
     fun findAllByUser(user: UserEntity): List<FriendEntity>
     fun findAllByFriend(user: UserEntity): List<FriendEntity>
     fun findAllByUserAndIsAcceptTrue(user: UserEntity): List<FriendEntity>
