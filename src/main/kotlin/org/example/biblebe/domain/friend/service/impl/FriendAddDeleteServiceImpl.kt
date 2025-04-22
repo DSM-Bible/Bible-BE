@@ -9,7 +9,6 @@ import org.example.biblebe.domain.user.entity.UserEntity
 import org.example.biblebe.domain.user.exception.UserNotFoundException
 import org.example.biblebe.domain.user.service.GetUserService
 import org.example.biblebe.global.service.CurrentUserProvider
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.transaction.annotation.Isolation
