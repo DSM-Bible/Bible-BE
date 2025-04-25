@@ -47,8 +47,9 @@ class SecurityConfig(
                 // board
                 authorize(HttpMethod.POST, "/board", authenticated)
                 authorize(HttpMethod.PATCH, "/board", authenticated)
-                authorize(HttpMethod.DELETE, "/board", authenticated)
+                authorize(HttpMethod.DELETE, "/board/*", authenticated)
                 authorize(HttpMethod.GET, "/board/list", authenticated)
+                authorize(HttpMethod.GET, "/board/*", authenticated)
                 authorize(HttpMethod.GET, "/board/:id", authenticated)
                 authorize(HttpMethod.POST, "/board/:id/comment", authenticated)
                 authorize(HttpMethod.PATCH, "/board/:id/comment", authenticated)

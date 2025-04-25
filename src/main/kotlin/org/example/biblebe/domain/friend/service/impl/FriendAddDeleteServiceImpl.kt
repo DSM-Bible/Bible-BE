@@ -53,8 +53,11 @@ class FriendAddDeleteServiceImpl(
         
         val friendUser: UserEntity = getUserService.getUserByUserId(friendId)
         
-        val existingFriend = friendRepository.findByUserAndFriend(currentUser, friendUser)
-            ?: throw FriendException(FriendErrorCode.FRIEND_NOT_FOUND)
+        val existingFriend = friendRepository.findByUserAndFriend(currentUser, friendUser).orElseGet(
+            ({
+                friendRepository.findByFriendAndUser(currentUser,friendUser).orElseThrow();
+            })
+        )
         
         friendRepository.delete(existingFriend)
     }
@@ -69,7 +72,7 @@ class FriendAddDeleteServiceImpl(
             ?: throw FriendException(FriendErrorCode.FRIEND_NOT_FOUND)
 
         // 직접 엔티티 속성을 변경하는 대신 쿼리를 사용하여 업데이트
-        friendRepository.updateFriendAcceptStatus(existingFriend.id, true)
+        friendRepository.updateFriendAcceptStatus(existingFriend.orElseThrow().id, true)
     }
 
 } 

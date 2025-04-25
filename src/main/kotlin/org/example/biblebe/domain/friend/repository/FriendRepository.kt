@@ -25,5 +25,9 @@ interface FriendRepository : CrudRepository<FriendEntity, UUID> {
     fun findAllByUser(user: UserEntity): List<FriendEntity>
     fun findAllByFriend(user: UserEntity): List<FriendEntity>
     fun findAllByUserAndIsAcceptTrue(user: UserEntity): List<FriendEntity>
-    fun findByUserAndFriend(user: UserEntity, friend: UserEntity): FriendEntity?
+    fun findByUserAndFriend(user: UserEntity, friend: UserEntity): Optional<FriendEntity>
+
+    @Modifying
+    @Query("SELECT f FROM FriendEntity f WHERE (f.user.userId = :friend AND f.friend.userId = :user )")
+    fun findByFriendAndUser(user: UserEntity, friend: UserEntity): Optional<FriendEntity>
 } 
