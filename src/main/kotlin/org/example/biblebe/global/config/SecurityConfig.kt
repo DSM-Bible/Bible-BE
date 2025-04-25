@@ -4,6 +4,7 @@ import org.example.biblebe.global.filter.FilterConfig
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
+import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.config.annotation.web.invoke
@@ -22,6 +23,7 @@ class SecurityConfig(
     fun securityChain(http: HttpSecurity): SecurityFilterChain {
         http {
             csrf { disable() }
+            cors { Customizer.withDefaults<Any>() }
             httpBasic { disable() }
             formLogin { disable() }
 
