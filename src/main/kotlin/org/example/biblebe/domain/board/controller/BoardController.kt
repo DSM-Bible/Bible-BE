@@ -1,0 +1,96 @@
+package org.example.biblebe.domain.board.controller
+
+import jakarta.validation.Valid
+import org.example.biblebe.domain.board.dto.BoardListResponse
+import org.example.biblebe.domain.board.dto.BoardRequest
+import org.example.biblebe.domain.board.dto.BoardResponse
+import org.example.biblebe.domain.board.service.BoardService
+import org.example.biblebe.global.ApiResponse
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
+import org.springframework.http.MediaType
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
+import java.util.UUID
+
+@RestController
+@RequestMapping("/board")
+class BoardController(
+    private val boardService: BoardService
+) {
+    @PostMapping(consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
+    fun createBoard(
+        @RequestPart("request") @Valid request: BoardRequest,
+        @RequestPart("file", required = false) file: MultipartFile?
+    ): ApiResponse<BoardResponse> {
+        val response = boardService.createBoard(request, file)
+        return ApiResponse(
+            status = "200 OK",
+            message = "게시글이 성공적으로 등록되었습니다.",
+            data = response
+        )
+    }
+
+    @GetMapping("/{boardId}")
+    fun getBoard(@PathVariable boardId: UUID): ApiResponse<BoardResponse> {
+        val response = boardService.getBoardById(boardId)
+        return ApiResponse(
+            status = "200 OK",
+            message = "게시글 조회에 성공했습니다.",
+            data = response
+        )
+    }
+
+    @GetMapping("/list")
+    fun getBoards(
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "10") size: Int
+    ): ApiResponse<BoardListResponse> {
+        val pageable = PageRequest.of(page, size)
+        val response = boardService.getBoards(pageable)
+        return ApiResponse(
+            status = "200 OK",
+            message = "게시글 목록 조회에 성공했습니다.",
+            data = response
+        )
+    }
+
+    @GetMapping("/search")
+    fun searchBoards(
+        @RequestParam keyword: String,
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "10") size: Int
+    ): ApiResponse<BoardListResponse> {
+        val pageable = PageRequest.of(page, size)
+        val response = boardService.searchBoards(keyword, pageable)
+        return ApiResponse(
+            status = "200 OK",
+            message = "게시글 검색에 성공했습니다.",
+            data = response
+        )
+    }
+
+    @PatchMapping(value = ["/{boardId}"], consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
+    fun updateBoard(
+        @PathVariable boardId: UUID,
+        @RequestPart("request") @Valid request: BoardRequest,
+        @RequestPart("file", required = false) file: MultipartFile?
+    ): ApiResponse<BoardResponse> {
+        val response = boardService.updateBoard(boardId, request, file)
+        return ApiResponse(
+            status = "200 OK",
+            message = "게시글이 성공적으로 수정되었습니다.",
+            data = response
+        )
+    }
+
+    @DeleteMapping("/{boardId}")
+    fun deleteBoard(@PathVariable boardId: UUID): ApiResponse<Unit> {
+        boardService.deleteBoard(boardId)
+        return ApiResponse(
+            status = "200 OK",
+            message = "게시글이 성공적으로 삭제되었습니다.",
+            data = Unit
+        )
+    }
+} 
