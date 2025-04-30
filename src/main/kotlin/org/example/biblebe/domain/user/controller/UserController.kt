@@ -3,14 +3,17 @@ package org.example.biblebe.domain.user.controller
 import org.example.biblebe.domain.user.dto.request.CheckUserIdExistsRequestDto
 import org.example.biblebe.domain.user.dto.request.LoginRequestDto
 import org.example.biblebe.domain.user.dto.request.SignupRequestDto
+import org.example.biblebe.domain.user.dto.request.UpdateUserProfileRequestDto
 import org.example.biblebe.domain.user.dto.response.CheckUserIdExistsResponseDto
 import org.example.biblebe.domain.user.dto.response.LoginResponseDto
 import org.example.biblebe.domain.user.usecase.CheckUserIdExistsUseCase
 import org.example.biblebe.domain.user.usecase.LoginUseCase
 import org.example.biblebe.domain.user.usecase.SignupUseCase
+import org.example.biblebe.domain.user.usecase.UpdateUserProfileUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -24,7 +27,8 @@ import org.springframework.web.multipart.MultipartFile
 class UserController(
     private val signupUseCase: SignupUseCase,
     private val loginUseCase: LoginUseCase,
-    private val checkUserIdExistsUseCase: CheckUserIdExistsUseCase
+    private val checkUserIdExistsUseCase: CheckUserIdExistsUseCase,
+    private val updateUserProfileUseCase: UpdateUserProfileUseCase
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -46,5 +50,14 @@ class UserController(
     @GetMapping("/userId")
     fun checkUserIdExists(@Validated @RequestBody request: CheckUserIdExistsRequestDto): CheckUserIdExistsResponseDto {
         return checkUserIdExistsUseCase.execute(request)
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PatchMapping
+    fun updateUser(
+        @RequestPart("file", required = false) file: MultipartFile?,
+        @Validated @RequestPart("body") request: UpdateUserProfileRequestDto
+    ) {
+        return updateUserProfileUseCase.execute(file, request)
     }
 }

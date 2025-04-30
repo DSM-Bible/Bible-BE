@@ -6,22 +6,24 @@ import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.hibernate.annotations.ColumnDefault
 import org.hibernate.annotations.DynamicInsert
+import org.hibernate.annotations.DynamicUpdate
 
 @Entity
 @DynamicInsert
+@DynamicUpdate
 @Table(name = "user")
 class UserEntity(
         @Id
         @Column(nullable = false, columnDefinition = "VARCHAR(15)")
-        val userId: String,
+        var userId: String,
 
         @Column(nullable = false, columnDefinition = "VARCHAR(225)")
-        val password: String,
+        var password: String,
 
         @Column(nullable = false, columnDefinition = "VARCHAR(8)")
-        val nickname: String,
+        var nickname: String,
 
         @ColumnDefault("'BASE_PROFILE_URL'")
         @Column(nullable = false, columnDefinition = "VARCHAR(200)")
-        val profile: String?
+        var profile: String?
 )
