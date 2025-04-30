@@ -14,25 +14,25 @@ import java.util.UUID
 class TodoEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private val todoId: UUID? = null,
+    val todoId: UUID? = null,
 
     @ManyToOne(optional = true, targetEntity = UserEntity::class)
     @JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private val user: UserEntity,
+    val user: UserEntity,
 
     @Column(columnDefinition = "varchar(200)", nullable = false)
-    private val title: String,
+    val title: String,
 
     @Column(columnDefinition = "datetime", nullable = true)
-    private val startTime: LocalDate,
+    val startTime: LocalDate,
 
 
     @ColumnDefault("'0'")
     @Column(columnDefinition = "integer", nullable = false)
-    private val remind: Int,
+    val remind: Int,
 
     @ColumnDefault("'0'")
     @Column(columnDefinition = "tinyint", nullable = false)
-    private val isCompleted: Boolean? = null
+    val isCompleted: Boolean? = null
 )
