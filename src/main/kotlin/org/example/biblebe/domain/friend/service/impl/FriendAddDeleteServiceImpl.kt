@@ -52,11 +52,11 @@ class FriendAddDeleteServiceImpl(
         
         val friendUser: UserEntity = getUserService.getUserByUserId(friendId)
         
-        val existingFriend = friendRepository.findByUserAndFriend(currentUser, friendUser).orElseGet(
-            ({
-                friendRepository.findByFriendAndUser(currentUser,friendUser).orElseThrow();
-            })
-        )
+        val existingFriend = friendRepository.findByUserAndFriend(currentUser, friendUser)
+            .orElseGet {
+                friendRepository.findByFriendAndUser(currentUser.userId,friendUser.userId).orElseThrow();
+            }
+
         
         friendRepository.delete(existingFriend)
     }
