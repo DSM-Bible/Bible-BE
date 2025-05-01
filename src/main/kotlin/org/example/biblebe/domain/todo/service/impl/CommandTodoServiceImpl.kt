@@ -13,4 +13,8 @@ class CommandTodoServiceImpl(
     override fun saveTodo(todoEntity: TodoEntity) {
         todoJpaRepository.save(todoEntity)
     }
+
+    override fun deleteTodo(todoEntity: TodoEntity) {
+        todoJpaRepository.delete(todoEntity)
+    }
 }
