@@ -10,9 +10,11 @@ import java.util.*
 
 interface FriendRepository : CrudRepository<FriendEntity, UUID> {
 
+    @Modifying
     @Query("INSERT INTO FriendEntity (user, friend, isAccept) VALUES (:#{#friend.user}, :#{#friend.friend}, :#{#friend.isAccept})")
     fun save(friend: FriendEntity)
 
+    @Modifying
     @Query("UPDATE FriendEntity f SET f.isAccept = :isAccept WHERE f.id = :id")
     fun updateFriendAcceptStatus(@Param("id") id: UUID, @Param("isAccept") isAccept: Boolean)
 
