@@ -1,5 +1,6 @@
 package org.example.biblebe.domain.friend.controller
 
+import org.example.biblebe.domain.friend.dto.AcceptDeleteFriendRequest
 import org.example.biblebe.domain.friend.dto.AddFriendRequest
 import org.example.biblebe.domain.friend.dto.EmptyResponse
 import org.example.biblebe.domain.friend.dto.FriendListResponse
@@ -57,7 +58,7 @@ class FriendController(
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
     fun addFriend(@Validated @RequestBody request: AddFriendRequest): ApiResponse<EmptyResponse> {
-        friendAddDeleteService.addFriend(request.friendId)
+        friendAddDeleteService.addFriend(request.userId)
         return ApiResponse(
             status = "200 Ok",
             message = "정상적으로 처리되었습니다",
@@ -67,7 +68,7 @@ class FriendController(
 
     @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/acceptance")
-    fun acceptFriend(@RequestBody request: AddFriendRequest): ApiResponse<*> {
+    fun acceptFriend(@RequestBody request: AcceptDeleteFriendRequest): ApiResponse<*> {
         friendAddDeleteService.setFriendUserTrue(request.friendId)
         return ApiResponse(
             status = "200 Ok",
@@ -78,7 +79,7 @@ class FriendController(
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping
-    fun deleteFriend(@Validated @RequestBody request: AddFriendRequest): ApiResponse<EmptyResponse> {
+    fun deleteFriend(@Validated @RequestBody request: AcceptDeleteFriendRequest): ApiResponse<EmptyResponse> {
         friendAddDeleteService.deleteFriend(request.friendId)
         return ApiResponse(
             status = "200 Ok",
