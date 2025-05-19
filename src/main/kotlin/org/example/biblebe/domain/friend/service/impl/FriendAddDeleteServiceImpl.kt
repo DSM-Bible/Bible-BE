@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.transaction.annotation.Isolation
 import org.springframework.orm.ObjectOptimisticLockingFailureException
+import kotlin.math.log
 
 
 @Service
@@ -33,7 +34,7 @@ class FriendAddDeleteServiceImpl(
         val friendUser: UserEntity = getUserService.getUserByUserId(friendId)
 
         val existingFriend = friendRepository.findByUserAndFriend(currentUser, friendUser)
-        if (existingFriend != null) {
+        if (existingFriend.isPresent) {
             throw FriendException(FriendErrorCode.ALREADY_FRIEND)
         }
         
