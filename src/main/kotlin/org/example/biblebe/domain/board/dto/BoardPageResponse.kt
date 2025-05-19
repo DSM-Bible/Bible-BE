@@ -11,6 +11,7 @@ data class BoardPageResponse(
     val userId: String,
     val userName: String,
     val fileUrl: String?,
+    val likeCount: Int
 ) {
     companion object {
         fun fromEntity(boardEntity: BoardEntity): BoardPageResponse {
@@ -19,7 +20,8 @@ data class BoardPageResponse(
                 title = boardEntity.title,
                 userId = boardEntity.user.userId,
                 userName = boardEntity.user.nickname,
-                fileUrl = boardEntity.fileUrl
+                fileUrl = boardEntity.fileUrl,
+                likeCount = boardEntity.likeCount
             )
         }
     }

@@ -93,4 +93,34 @@ class BoardController(
             data = Unit
         )
     }
+    
+    @PostMapping("/{boardId}/like")
+    fun likeBoard(@PathVariable boardId: UUID): ApiResponse<BoardResponse> {
+        val response = boardService.likeBoard(boardId)
+        return ApiResponse(
+            status = "200 OK",
+            message = "게시글에 좋아요를 성공적으로 등록했습니다.",
+            data = response
+        )
+    }
+    
+    @DeleteMapping("/{boardId}/like")
+    fun unlikeBoard(@PathVariable boardId: UUID): ApiResponse<BoardResponse> {
+        val response = boardService.unlikeBoard(boardId)
+        return ApiResponse(
+            status = "200 OK",
+            message = "게시글 좋아요를 성공적으로 취소했습니다.",
+            data = response
+        )
+    }
+    
+    @GetMapping("/{boardId}/like")
+    fun getLikeStatus(@PathVariable boardId: UUID): ApiResponse<Map<String, Boolean>> {
+        val isLiked = boardService.getLikeStatus(boardId)
+        return ApiResponse(
+            status = "200 OK",
+            message = "좋아요 상태 조회에 성공했습니다.",
+            data = mapOf("isLiked" to isLiked)
+        )
+    }
 } 

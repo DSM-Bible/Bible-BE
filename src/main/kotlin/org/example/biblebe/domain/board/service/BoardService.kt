@@ -14,4 +14,7 @@ interface BoardService {
     fun searchBoards(keyword: String, pageable: Pageable): BoardListResponse
     fun updateBoard(boardId: UUID, request: BoardRequest, file: MultipartFile?): BoardResponse
     fun deleteBoard(boardId: UUID)
+    fun likeBoard(boardId: UUID): BoardResponse
+    fun unlikeBoard(boardId: UUID): BoardResponse
+    fun getLikeStatus(boardId: UUID): Boolean
 } 

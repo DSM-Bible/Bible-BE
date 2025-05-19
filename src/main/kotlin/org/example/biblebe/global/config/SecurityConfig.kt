@@ -48,14 +48,12 @@ class SecurityConfig(
 
                 // board
                 authorize(HttpMethod.POST, "/board", authenticated)
+                authorize(HttpMethod.POST, "/board/**", authenticated)
                 authorize(HttpMethod.PATCH, "/board", authenticated)
-                authorize(HttpMethod.DELETE, "/board/*", authenticated)
+                authorize(HttpMethod.DELETE, "/board/**", authenticated)
                 authorize(HttpMethod.GET, "/board/list", authenticated)
-                authorize(HttpMethod.GET, "/board/*", authenticated)
+                authorize(HttpMethod.GET, "/board/**", authenticated)
                 authorize(HttpMethod.GET, "/board/:id", authenticated)
-                authorize(HttpMethod.POST, "/board/:id/comment", authenticated)
-                authorize(HttpMethod.PATCH, "/board/:id/comment", authenticated)
-                authorize(HttpMethod.DELETE, "/board/:id/comment", authenticated)
 
                 // friend
                 authorize(HttpMethod.POST, "/friend", authenticated)
@@ -64,7 +62,7 @@ class SecurityConfig(
                 authorize(HttpMethod.GET, "/friend/*", authenticated)
                 authorize(HttpMethod.PATCH, "/friend/acceptance", authenticated)
 
-                authorize(anyRequest, denyAll)
+                authorize(anyRequest,denyAll)
             }
 
             sessionManagement { SessionCreationPolicy.STATELESS }

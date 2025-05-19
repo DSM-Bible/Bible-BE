@@ -10,7 +10,9 @@ enum class BoardErrorCode(
     BOARD_NOT_FOUND(ErrorStatus.NOT_FOUND, "게시글을 찾을 수 없습니다"),
     NOT_BOARD_OWNER(ErrorStatus.FORBIDDEN, "게시글의 작성자가 아닙니다"),
     FILE_UPLOAD_ERROR(ErrorStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다"),
-    FILE_NOT_FOUND(ErrorStatus.NOT_FOUND, "파일을 찾을 수 없습니다");
+    FILE_NOT_FOUND(ErrorStatus.NOT_FOUND, "파일을 찾을 수 없습니다"),
+    ALREADY_LIKED(ErrorStatus.BAD_REQUEST, "이미 좋아요를 누른 게시글입니다"),
+    NOT_LIKED(ErrorStatus.BAD_REQUEST, "좋아요를 누르지 않은 게시글입니다");
 
     override fun getCode(): Int = code
     override fun getMessage(): String = message

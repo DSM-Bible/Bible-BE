@@ -6,24 +6,23 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 @Entity
-@Table(name = "board")
-class BoardEntity(
+@Table(name = "board_like",
+    uniqueConstraints = [
+        UniqueConstraint(columnNames = ["board_id", "user_id"])
+    ]
+)
+class BoardLikeEntity(
     @Id
     val id: UUID = UUID.randomUUID(),
 
-    @Column(nullable = false)
-    val title: String,
-
-    @Column(nullable = false, columnDefinition = "TEXT")
-    val content: String,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id", nullable = false)
+    val board: BoardEntity,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     val user: UserEntity,
-    
-    @Column
-    val fileUrl: String? = null,
 
     @Column(nullable = false)
-    var likeCount: Int = 0
+    val createdAt: LocalDateTime = LocalDateTime.now()
 ) 

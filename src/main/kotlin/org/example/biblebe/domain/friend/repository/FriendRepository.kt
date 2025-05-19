@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
 import org.springframework.data.repository.query.Param
 import java.util.*
-
+// 친구 추가를 위해 일반 유저에 대한 목록 반환을 요구함.
+// 1. 친구로 추가된 유저는 목록에 나와서는 안된다.
 interface FriendRepository : CrudRepository<FriendEntity, UUID> {
 
     @Modifying
