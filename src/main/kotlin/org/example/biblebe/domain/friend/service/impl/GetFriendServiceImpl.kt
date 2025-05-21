@@ -24,6 +24,7 @@ class GetFriendServiceImpl(
         val user = getUserService.getUserByUserId(currentUser)
 
         return friendRepository.findAllByUser(user)
+            .filter { it.isAccept }
             .map { 
                 FriendResponse(
                     friend_id = it.friend.userId,
