@@ -5,11 +5,9 @@ import org.example.biblebe.domain.user.dto.request.LoginRequestDto
 import org.example.biblebe.domain.user.dto.request.SignupRequestDto
 import org.example.biblebe.domain.user.dto.request.UpdateUserProfileRequestDto
 import org.example.biblebe.domain.user.dto.response.CheckUserIdExistsResponseDto
+import org.example.biblebe.domain.user.dto.response.GetUserResponseDto
 import org.example.biblebe.domain.user.dto.response.LoginResponseDto
-import org.example.biblebe.domain.user.usecase.CheckUserIdExistsUseCase
-import org.example.biblebe.domain.user.usecase.LoginUseCase
-import org.example.biblebe.domain.user.usecase.SignupUseCase
-import org.example.biblebe.domain.user.usecase.UpdateUserProfileUseCase
+import org.example.biblebe.domain.user.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
@@ -28,7 +26,8 @@ class UserController(
     private val signupUseCase: SignupUseCase,
     private val loginUseCase: LoginUseCase,
     private val checkUserIdExistsUseCase: CheckUserIdExistsUseCase,
-    private val updateUserProfileUseCase: UpdateUserProfileUseCase
+    private val updateUserProfileUseCase: UpdateUserProfileUseCase,
+    private val userInfoUseCase: GetUserInfoUseCase
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -50,6 +49,12 @@ class UserController(
     @GetMapping("/userId")
     fun checkUserIdExists(@Validated @RequestBody request: CheckUserIdExistsRequestDto): CheckUserIdExistsResponseDto {
         return checkUserIdExistsUseCase.execute(request)
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    fun getCurrentUserInfo(): GetUserResponseDto {
+        return userInfoUseCase.execute()
     }
 
     @ResponseStatus(HttpStatus.OK)

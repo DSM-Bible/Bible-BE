@@ -32,6 +32,7 @@ class SecurityConfig(
                 authorize(HttpMethod.POST, "/account/login", permitAll)
                 authorize(HttpMethod.POST, "/account/signup", permitAll)
                 authorize(HttpMethod.GET, "/account/userId", permitAll)
+                authorize(HttpMethod.GET, "/account", authenticated)
                 authorize(HttpMethod.PATCH, "/account", authenticated)
 
                 // calender
