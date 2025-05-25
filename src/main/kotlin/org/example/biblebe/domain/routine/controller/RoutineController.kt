@@ -2,9 +2,11 @@ package org.example.biblebe.domain.routine.controller
 
 import jakarta.validation.Valid
 import org.example.biblebe.domain.routine.dto.request.CreateRoutineRequestDto
+import org.example.biblebe.domain.routine.dto.response.GetRoutineDetailResponseDto
 import org.example.biblebe.domain.routine.dto.response.GetRoutineListResponseDto
 import org.example.biblebe.domain.routine.usecase.CreateRoutineUseCase
 import org.example.biblebe.domain.routine.usecase.DeleteRoutineUseCase
+import org.example.biblebe.domain.routine.usecase.GetRoutineDetailUseCase
 import org.example.biblebe.domain.routine.usecase.GetRoutineListUseCase
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -15,7 +17,8 @@ import java.util.UUID
 class RoutineController (
     private val createRoutineUseCase: CreateRoutineUseCase,
     private val deleteRoutineUseCase: DeleteRoutineUseCase,
-    private val getRoutineListUseCase: GetRoutineListUseCase
+    private val getRoutineListUseCase: GetRoutineListUseCase,
+    private val getRoutineDetailUseCase: GetRoutineDetailUseCase
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -31,8 +34,14 @@ class RoutineController (
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping("/list")
+    @GetMapping("/list")
     fun getRoutineList(): List<GetRoutineListResponseDto> {
         return getRoutineListUseCase.execute()
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/detail/{routineId}")
+    fun getRoutineDetail(@PathVariable routineId: UUID): GetRoutineDetailResponseDto {
+        return getRoutineDetailUseCase.execute(routineId)
     }
 }
