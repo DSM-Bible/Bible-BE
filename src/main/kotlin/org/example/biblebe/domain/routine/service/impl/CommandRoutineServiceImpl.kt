@@ -13,4 +13,8 @@ class CommandRoutineServiceImpl(
     override fun saveRoutine(routineEntity: RoutineEntity) {
         routineJpaRepository.save(routineEntity)
     }
+
+    override fun deleteRoutine(routineEntity: RoutineEntity) {
+        routineJpaRepository.delete(routineEntity)
+    }
 }

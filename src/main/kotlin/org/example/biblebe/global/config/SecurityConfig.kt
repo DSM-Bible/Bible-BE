@@ -44,6 +44,7 @@ class SecurityConfig(
 
                 // routine
                 authorize(HttpMethod.POST, "/routine", authenticated)
+                authorize(HttpMethod.DELETE, "/routine/{routineId}", authenticated)
                 authorize(HttpMethod.POST, "/routine/start", authenticated)
                 authorize(HttpMethod.DELETE, "/routine/stop", authenticated)
 
