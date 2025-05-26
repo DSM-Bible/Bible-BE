@@ -2,15 +2,10 @@ package org.example.biblebe.domain.routine.entity
 
 import jakarta.persistence.*
 import org.example.biblebe.domain.user.entity.UserEntity
-import org.hibernate.annotations.ColumnDefault
-import org.hibernate.annotations.DynamicInsert
-import org.hibernate.annotations.DynamicUpdate
-import org.hibernate.annotations.OnDelete
-import org.hibernate.annotations.OnDeleteAction
+import org.hibernate.annotations.*
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
-import java.util.UUID
+import java.util.*
 
 @Entity(name = "routine")
 @DynamicInsert
@@ -37,4 +32,8 @@ class RoutineEntity (
 
     @Column(columnDefinition = "time", nullable = false)
     var endTime: LocalTime,
+
+    @ColumnDefault("(CURRENT_DATE)")
+    @Column(columnDefinition = "date", nullable = false)
+    var createdAt: LocalDate? = null
 )
