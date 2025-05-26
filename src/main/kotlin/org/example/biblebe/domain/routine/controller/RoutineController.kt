@@ -17,7 +17,8 @@ class RoutineController (
     private val deleteRoutineUseCase: DeleteRoutineUseCase,
     private val updateRoutineUseCase: UpdateRoutineUseCase,
     private val getRoutineListUseCase: GetRoutineListUseCase,
-    private val getRoutineDetailUseCase: GetRoutineDetailUseCase
+    private val getRoutineDetailUseCase: GetRoutineDetailUseCase,
+    private val startRoutineUseCase: StartRoutineUseCase
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -51,5 +52,11 @@ class RoutineController (
     @GetMapping("/detail/{routineId}")
     fun getRoutineDetail(@PathVariable routineId: UUID): GetRoutineDetailResponseDto {
         return getRoutineDetailUseCase.execute(routineId)
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/start/{routineId}")
+    fun startRoutine(@PathVariable routineId: UUID) {
+        startRoutineUseCase.execute(routineId)
     }
 }

@@ -19,7 +19,7 @@ class RoutineEntity (
     @GeneratedValue(strategy = GenerationType.UUID)
     val routineId: UUID? = null,
 
-    @ManyToOne(optional = true, targetEntity = UserEntity::class)
+    @ManyToOne(optional = false, targetEntity = UserEntity::class)
     @JoinColumn(name = "userId", referencedColumnName = "userId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     var user: UserEntity,
