@@ -18,7 +18,8 @@ class RoutineController (
     private val updateRoutineUseCase: UpdateRoutineUseCase,
     private val getRoutineListUseCase: GetRoutineListUseCase,
     private val getRoutineDetailUseCase: GetRoutineDetailUseCase,
-    private val startRoutineUseCase: StartRoutineUseCase
+    private val startRoutineUseCase: StartRoutineUseCase,
+    private val endRoutineUseCase: EndRoutineUseCase
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -58,5 +59,11 @@ class RoutineController (
     @PostMapping("/start/{routineId}")
     fun startRoutine(@PathVariable routineId: UUID) {
         startRoutineUseCase.execute(routineId)
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/start/{routineId}")
+    fun endRoutine(@PathVariable routineId: UUID) {
+        endRoutineUseCase.execute(routineId)
     }
 }

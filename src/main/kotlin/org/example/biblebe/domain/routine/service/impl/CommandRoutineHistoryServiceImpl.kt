@@ -13,4 +13,8 @@ class CommandRoutineHistoryServiceImpl(
     override fun saveRoutineHistory(routineHistoryEntity: RoutineHistoryEntity) {
         routineHistoryJpaRepository.save(routineHistoryEntity)
     }
+
+    override fun deleteRoutineHistory(routineHistory: RoutineHistoryEntity) {
+        routineHistoryJpaRepository.delete(routineHistory)
+    }
 }
