@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 import org.springframework.boot.context.properties.bind.DefaultValue
 import java.time.LocalDateTime
 import java.util.*
@@ -23,6 +25,7 @@ class RoutineHistoryEntity (
 
     @ManyToOne(optional = false, targetEntity = RoutineEntity::class)
     @JoinColumn(referencedColumnName = "routineId", name = "routineId", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     val routine: RoutineEntity,
 
     @Column(columnDefinition = "datetime", nullable = false)

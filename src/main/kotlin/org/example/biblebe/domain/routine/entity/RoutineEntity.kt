@@ -28,13 +28,13 @@ class RoutineEntity (
     @Column(columnDefinition = "varchar(12)", nullable = false)
     var name: String,
 
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     var repeatPeriod: RepeatPeriod,
 
-    @Column(columnDefinition = "datetime", nullable = false)
+    @Column(columnDefinition = "time", nullable = false)
     var startTime: LocalTime,
 
-    @Column(columnDefinition = "datetime", nullable = false)
+    @Column(columnDefinition = "time", nullable = false)
     var endTime: LocalTime,
 )
