@@ -23,10 +23,11 @@ class UpdateRoutineUseCase(
 
         checkRoutineService.checkIsOwnerOfRoutine(user, routine)
 
-        routine.name = request.title
-        routine.startTime = request.startTime
-        routine.endTime = request.endTime
-        routine.repeatPeriod = request.repeatPeriod
+        routine.name = request.title ?: routine.name
+        routine.startTime = request.startTime ?: routine.startTime
+        routine.endTime = request.endTime ?: routine.endTime
+        routine.repeatPeriod = request.repeatPeriod ?: routine.repeatPeriod
+
         commandRoutineService.saveRoutine(routine)
     }
 }

@@ -13,8 +13,8 @@ class GetRoutineListUseCase(
     private val currentUserProvider: CurrentUserProvider,
     private val getRoutineService: GetRoutineService
 ) {
-    fun execute(): List<GetRoutineListResponseDto> {
+    fun execute(): GetRoutineListResponseDto {
         val routines = getRoutineService.getTodayRoutineList(currentUserProvider.getCurrentUser())
-        return routines.map { routine -> GetRoutineListResponseDto.from(routine) }.toList()
+        return GetRoutineListResponseDto.from(routines)
     }
 }

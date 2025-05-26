@@ -19,6 +19,6 @@ class GetRoutineServiceImpl (
     }
 
     override fun getTodayRoutineList(user: UserEntity): List<RoutineEntity> {
-        return routineJpaRepository.findAllTodayRoutine(LocalDate.now(), user.userId)
+        return routineJpaRepository.findAllByNextRoutineDateAndUser(LocalDate.now(), user)
     }
 }

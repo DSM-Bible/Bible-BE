@@ -7,11 +7,11 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
+import org.hibernate.annotations.ColumnDefault
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
-import org.springframework.boot.context.properties.bind.DefaultValue
 import java.time.LocalDateTime
 import java.util.*
 
@@ -34,7 +34,7 @@ class RoutineHistoryEntity (
     @Column(columnDefinition = "datetime", nullable = true)
     var endTime: LocalDateTime? = null,
 
-    @DefaultValue("0")
+    @ColumnDefault("0")
     @Column(columnDefinition = "tinyint", nullable = false)
     var isEnd: Boolean? = null
 )

@@ -45,7 +45,7 @@ class RoutineController (
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/list")
-    fun getRoutineList(): List<GetRoutineListResponseDto> {
+    fun getRoutineList():GetRoutineListResponseDto {
         return getRoutineListUseCase.execute()
     }
 
@@ -62,7 +62,7 @@ class RoutineController (
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/start/{routineId}")
+    @PatchMapping("/stop/{routineId}")
     fun endRoutine(@PathVariable routineId: UUID) {
         endRoutineUseCase.execute(routineId)
     }

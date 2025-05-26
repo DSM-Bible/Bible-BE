@@ -8,6 +8,8 @@ import org.example.biblebe.domain.routine.service.impl.CheckRoutineHistoryServic
 import org.example.biblebe.global.service.CurrentUserProvider
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDateTime
+import java.time.LocalTime
 import java.util.UUID
 
 @Service
@@ -28,6 +30,8 @@ class EndRoutineUseCase(
         checkRoutineService.checkIsOwnerOfRoutine(user, routineHistory.routine)
         checkRoutineHistoryServiceImpl.checkRoutineIsNotEnd(routineHistory)
 
-        commandRoutineHistoryService.deleteRoutineHistory(routineHistory)
+        routineHistory.isEnd = true
+        routineHistory.endTime = LocalDateTime.now()
+        commandRoutineHistoryService.saveRoutineHistory(routineHistory)
     }
 }
