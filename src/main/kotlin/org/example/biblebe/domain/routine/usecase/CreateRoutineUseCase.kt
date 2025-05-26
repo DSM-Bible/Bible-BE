@@ -20,6 +20,7 @@ class CreateRoutineUseCase(
             null,
             user,
             request.title,
+            request.repeatPeriod,
             request.startTime,
             request.endTime
         ))

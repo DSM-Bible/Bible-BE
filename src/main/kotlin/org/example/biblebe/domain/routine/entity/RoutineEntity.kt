@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.util.UUID
 
 @Entity(name = "routine")
@@ -27,9 +28,13 @@ class RoutineEntity (
     @Column(columnDefinition = "varchar(12)", nullable = false)
     var name: String,
 
-    @Column(columnDefinition = "datetime", nullable = false)
-    var startTime: LocalDateTime,
+    @Enumerated
+    @Column(nullable = false)
+    var repeatPeriod: RepeatPeriod,
 
     @Column(columnDefinition = "datetime", nullable = false)
-    var endTime: LocalDateTime,
+    var startTime: LocalTime,
+
+    @Column(columnDefinition = "datetime", nullable = false)
+    var endTime: LocalTime,
 )

@@ -26,6 +26,7 @@ class UpdateRoutineUseCase(
         routine.name = request.title
         routine.startTime = request.startTime
         routine.endTime = request.endTime
+        routine.repeatPeriod = request.repeatPeriod
         commandRoutineService.saveRoutine(routine)
     }
 }
