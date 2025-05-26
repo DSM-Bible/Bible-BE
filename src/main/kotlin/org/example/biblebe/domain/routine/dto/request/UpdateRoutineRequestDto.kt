@@ -9,10 +9,10 @@ data class UpdateRoutineRequestDto(
         @field:Length(min = 1, max = 200)
         val title: String?,
 
-        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
         val startTime: LocalTime?,
 
-        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
         val endTime: LocalTime?,
 
         val repeatPeriod: RepeatPeriod?

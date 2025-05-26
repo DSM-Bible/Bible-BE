@@ -4,6 +4,7 @@ import jakarta.validation.Valid
 import org.example.biblebe.domain.routine.dto.request.CreateRoutineRequestDto
 import org.example.biblebe.domain.routine.dto.request.UpdateRoutineRequestDto
 import org.example.biblebe.domain.routine.dto.response.GetRoutineDetailResponseDto
+import org.example.biblebe.domain.routine.dto.response.GetRoutineHistoryListDto
 import org.example.biblebe.domain.routine.dto.response.GetRoutineListResponseDto
 import org.example.biblebe.domain.routine.usecase.*
 import org.springframework.http.HttpStatus
@@ -18,6 +19,7 @@ class RoutineController (
     private val updateRoutineUseCase: UpdateRoutineUseCase,
     private val getRoutineListUseCase: GetRoutineListUseCase,
     private val getRoutineDetailUseCase: GetRoutineDetailUseCase,
+    private val getRoutineHistoryListUseCase: GetRoutineHistoryListUseCase,
     private val startRoutineUseCase: StartRoutineUseCase,
     private val endRoutineUseCase: EndRoutineUseCase
 ) {
@@ -47,6 +49,12 @@ class RoutineController (
     @GetMapping("/list")
     fun getRoutineList():GetRoutineListResponseDto {
         return getRoutineListUseCase.execute()
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/list/history")
+    fun getRoutineHistoryList():GetRoutineHistoryListDto {
+        return getRoutineHistoryListUseCase.execute()
     }
 
     @ResponseStatus(HttpStatus.OK)

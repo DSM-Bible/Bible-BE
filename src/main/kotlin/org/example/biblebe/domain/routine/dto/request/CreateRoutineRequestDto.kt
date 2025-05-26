@@ -13,11 +13,11 @@ data class CreateRoutineRequestDto(
         val title: String,
 
         @field:NotNull
-        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
         val startTime: LocalTime,
 
         @field:NotNull
-        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
         val endTime: LocalTime,
 
         val repeatPeriod: RepeatPeriod

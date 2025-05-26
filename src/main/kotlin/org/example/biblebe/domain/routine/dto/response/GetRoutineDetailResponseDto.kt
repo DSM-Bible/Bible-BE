@@ -4,23 +4,24 @@ import org.example.biblebe.domain.routine.entity.RepeatPeriod
 import org.example.biblebe.domain.routine.entity.RoutineEntity
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 data class GetRoutineDetailResponseDto(
     val title: String,
 
     val repeatPeriod: RepeatPeriod,
 
-    val startTime: LocalTime,
+    val startTime: String,
 
-    val endTime: LocalTime
+    val endTime: String
 ) {
     companion object {
         fun from(routineEntity: RoutineEntity): GetRoutineDetailResponseDto {
             return GetRoutineDetailResponseDto(
                     routineEntity.name,
                     routineEntity.repeatPeriod,
-                    routineEntity.startTime,
-                    routineEntity.endTime,
+                    routineEntity.startTime.format(DateTimeFormatter.ofPattern("HH:mm")),
+                    routineEntity.endTime.format(DateTimeFormatter.ofPattern("HH:mm")),
             )
         }
     }
