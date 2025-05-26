@@ -35,5 +35,5 @@ class RoutineEntity (
 
     @ColumnDefault("(CURRENT_DATE)")
     @Column(columnDefinition = "date", nullable = false)
-    var createdAt: LocalDate? = null
+    var nextRoutineDate: LocalDate? = null
 )
