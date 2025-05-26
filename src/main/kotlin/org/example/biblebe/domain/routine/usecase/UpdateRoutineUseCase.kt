@@ -1,5 +1,6 @@
 package org.example.biblebe.domain.routine.usecase
 
+import org.example.biblebe.domain.routine.dto.request.UpdateRoutineRequestDto
 import org.example.biblebe.domain.routine.service.CheckRoutineService
 import org.example.biblebe.domain.routine.service.CommandRoutineService
 import org.example.biblebe.domain.routine.service.GetRoutineService
@@ -10,18 +11,21 @@ import java.util.UUID
 
 @Service
 @Transactional
-class DeleteRoutineUseCase(
+class UpdateRoutineUseCase(
     private val currentUserProvider: CurrentUserProvider,
     private val getRoutineService: GetRoutineService,
-    private val commandRoutineService: CommandRoutineService,
-    private val checkRoutineService: CheckRoutineService
+    private val checkRoutineService: CheckRoutineService,
+    private val commandRoutineService: CommandRoutineService
 ) {
-    fun execute(routineId: UUID) {
-        val routine = getRoutineService.getRoutineById(routineId)
+    fun execute(routineId: UUID, request: UpdateRoutineRequestDto) {
         val user = currentUserProvider.getCurrentUser()
+        val routine = getRoutineService.getRoutineById(routineId)
 
         checkRoutineService.checkIsOwnerOfRoutine(user, routine)
 
-        commandRoutineService.deleteRoutine(routine)
+        routine.name = request.title
+        routine.startTime = request.startTime
+        routine.endTime = request.endTime
+        commandRoutineService.saveRoutine(routine)
     }
 }
