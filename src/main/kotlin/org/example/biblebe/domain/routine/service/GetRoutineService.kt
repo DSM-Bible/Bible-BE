@@ -7,5 +7,5 @@ import java.util.*
 interface GetRoutineService {
     fun getRoutineById(id: UUID): RoutineEntity
 
-    fun getTodayRoutineList(user: UserEntity): List<RoutineEntity>
+    fun getRoutinesByUser(user: UserEntity): List<RoutineEntity>
 }

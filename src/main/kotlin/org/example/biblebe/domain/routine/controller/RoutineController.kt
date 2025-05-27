@@ -2,6 +2,7 @@ package org.example.biblebe.domain.routine.controller
 
 import jakarta.validation.Valid
 import org.example.biblebe.domain.routine.dto.request.CreateRoutineRequestDto
+import org.example.biblebe.domain.routine.dto.request.GetRoutineListRequestDto
 import org.example.biblebe.domain.routine.dto.request.UpdateRoutineRequestDto
 import org.example.biblebe.domain.routine.dto.response.GetRoutineDetailResponseDto
 import org.example.biblebe.domain.routine.dto.response.GetRoutineHistoryListDto
@@ -47,8 +48,10 @@ class RoutineController (
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/list")
-    fun getRoutineList():GetRoutineListResponseDto {
-        return getRoutineListUseCase.execute()
+    fun getRoutineList(
+        @Valid @RequestBody request: GetRoutineListRequestDto
+    ): GetRoutineListResponseDto {
+        return getRoutineListUseCase.execute(request)
     }
 
     @ResponseStatus(HttpStatus.OK)
