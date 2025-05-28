@@ -9,5 +9,5 @@ import java.util.UUID
 
 interface BoardRepository : JpaRepository<BoardEntity, UUID> {
     fun findAllByUser(user: UserEntity, pageable: Pageable): Page<BoardEntity>
-    fun findAllByTitleContainingOrContentContaining(title: String, content: String, pageable: Pageable): Page<BoardEntity>
+    fun findAllByTitleContainingOrContentContaining(title: String, content: String,): List<BoardEntity>
 } 

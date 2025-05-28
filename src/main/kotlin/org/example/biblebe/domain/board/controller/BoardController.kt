@@ -43,11 +43,8 @@ class BoardController(
 
     @GetMapping("/list")
     fun getBoards(
-        @RequestParam(defaultValue = "0") page: Int,
-        @RequestParam(defaultValue = "10") size: Int
     ): ApiResponse<BoardListResponse> {
-        val pageable = PageRequest.of(page, size)
-        val response = boardService.getBoards(pageable)
+        val response = boardService.getBoards()
         return ApiResponse(
             status = "200 OK",
             message = "게시글 목록 조회에 성공했습니다.",
@@ -57,12 +54,9 @@ class BoardController(
 
     @GetMapping("/search")
     fun searchBoards(
-        @RequestParam keyword: String,
-        @RequestParam(defaultValue = "0") page: Int,
-        @RequestParam(defaultValue = "10") size: Int
+        @RequestParam keyword: String
     ): ApiResponse<BoardListResponse> {
-        val pageable = PageRequest.of(page, size)
-        val response = boardService.searchBoards(keyword, pageable)
+        val response = boardService.searchBoards(keyword)
         return ApiResponse(
             status = "200 OK",
             message = "게시글 검색에 성공했습니다.",

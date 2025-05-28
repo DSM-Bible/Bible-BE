@@ -67,25 +67,25 @@ class BoardServiceImpl(
     }
 
     @Transactional(readOnly = true)
-    override fun getBoards(pageable: Pageable): BoardListResponse {
-        val boardsPage = boardRepository.findAll(pageable)
-        
+    override fun getBoards(): BoardListResponse {
+        val boardsPage = boardRepository.findAll()
+
         val boardResponses = boardsPage.map { board ->
             BoardPageResponse.fromEntity(board)
         }
 
-        return BoardListResponse.fromPage(boardResponses)
+        return BoardListResponse(boardResponses)
     }
 
     @Transactional(readOnly = true)
-    override fun searchBoards(keyword: String, pageable: Pageable): BoardListResponse {
-        val boardsPage = boardRepository.findAllByTitleContainingOrContentContaining(keyword, keyword, pageable)
+    override fun searchBoards(keyword: String): BoardListResponse {
+        val boardsPage = boardRepository.findAllByTitleContainingOrContentContaining(keyword, keyword)
         
         val boardResponses = boardsPage.map { board ->
             BoardPageResponse.fromEntity(board)
         }
 
-        return BoardListResponse.fromPage(boardResponses)
+        return BoardListResponse(boardResponses)
     }
 
     @Transactional

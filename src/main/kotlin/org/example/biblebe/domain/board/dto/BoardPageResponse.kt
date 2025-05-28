@@ -27,26 +27,10 @@ data class BoardPageResponse(
     }
 }
 
+
+
 data class BoardListResponse(
-    val content: List<BoardPageResponse>,
-    val totalPages: Int,
-    val totalElements: Long,
-    val size: Int,
-    val number: Int,
-    val first: Boolean,
-    val last: Boolean
+    val list: List<BoardPageResponse>,
 ) {
-    companion object {
-        fun fromPage(page: Page<BoardPageResponse>): BoardListResponse {
-            return BoardListResponse(
-                content = page.content,
-                totalPages = page.totalPages,
-                totalElements = page.totalElements,
-                size = page.size,
-                number = page.number,
-                first = page.isFirst,
-                last = page.isLast
-            )
-        }
-    }
+    constructor() : this(listOf())
 } 
