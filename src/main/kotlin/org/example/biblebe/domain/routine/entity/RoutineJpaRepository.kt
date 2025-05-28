@@ -7,5 +7,5 @@ import java.util.*
 
 interface RoutineJpaRepository: CrudRepository<RoutineEntity, UUID> {
 
-    fun findAllByNextRoutineDateAndUser(nextRoutineDate: LocalDate, user: UserEntity): List<RoutineEntity>
+    fun findAllByUser(user: UserEntity): List<RoutineEntity>
 }
