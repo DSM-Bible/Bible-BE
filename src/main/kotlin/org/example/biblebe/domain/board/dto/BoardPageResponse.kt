@@ -2,6 +2,7 @@ package org.example.biblebe.domain.board.dto
 
 import org.example.biblebe.domain.board.entity.BoardEntity
 import org.springframework.data.domain.Page
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -11,6 +12,7 @@ data class BoardPageResponse(
     val userId: String,
     val userName: String,
     val fileUrl: String?,
+    val timestamp: LocalDate,
     val likeCount: Int
 ) {
     companion object {
@@ -21,6 +23,7 @@ data class BoardPageResponse(
                 userId = boardEntity.user.userId,
                 userName = boardEntity.user.nickname,
                 fileUrl = boardEntity.fileUrl,
+                timestamp = boardEntity.timestamp,
                 likeCount = boardEntity.likeCount
             )
         }
