@@ -14,7 +14,7 @@ data class BoardResponse(
     val userImage: String?,
     val fileUrl: String?,
     val likeCount: Int,
-    val timestamp: LocalDate,
+    val timestamp: LocalDate?,
     val isLiked: Boolean = false
 ) {
     companion object {

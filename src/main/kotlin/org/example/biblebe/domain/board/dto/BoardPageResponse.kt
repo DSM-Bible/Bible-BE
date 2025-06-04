@@ -12,7 +12,7 @@ data class BoardPageResponse(
     val userId: String,
     val userName: String,
     val fileUrl: String?,
-    val timestamp: LocalDate,
+    val timestamp: LocalDate?,
     val likeCount: Int
 ) {
     companion object {
