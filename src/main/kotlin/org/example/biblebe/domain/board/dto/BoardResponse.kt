@@ -1,6 +1,7 @@
 package org.example.biblebe.domain.board.dto
 
 import org.example.biblebe.domain.board.entity.BoardEntity
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -13,6 +14,7 @@ data class BoardResponse(
     val userImage: String?,
     val fileUrl: String?,
     val likeCount: Int,
+    val timestamp: LocalDate,
     val isLiked: Boolean = false
 ) {
     companion object {
@@ -26,6 +28,7 @@ data class BoardResponse(
                 userImage = boardEntity.user.profile,
                 fileUrl = boardEntity.fileUrl,
                 likeCount = boardEntity.likeCount,
+                timestamp = boardEntity.timestamp,
                 isLiked = isLiked
             )
         }
