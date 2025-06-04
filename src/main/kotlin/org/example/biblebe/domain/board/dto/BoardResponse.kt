@@ -10,6 +10,7 @@ data class BoardResponse(
     val content: String,
     val userId: String,
     val userName: String,
+    val userImage: String?,
     val fileUrl: String?,
     val likeCount: Int,
     val isLiked: Boolean = false
@@ -22,6 +23,7 @@ data class BoardResponse(
                 content = boardEntity.content,
                 userId = boardEntity.user.userId,
                 userName = boardEntity.user.nickname,
+                userImage = boardEntity.user.profile,
                 fileUrl = boardEntity.fileUrl,
                 likeCount = boardEntity.likeCount,
                 isLiked = isLiked
