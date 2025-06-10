@@ -180,14 +180,15 @@ class BoardServiceImpl(
         val boardLike = boardLikeRepository.findByBoardAndUser(board, currentUser)
         
         if (boardLike != null) {
-            // 좋아요 삭제
-            boardLikeRepository.delete(boardLike)
-            
             // 게시글의 좋아요 수 감소
             if (board.likeCount > 0) {
                 board.likeCount -= 1
-                boardRepository.save(board)
             }
+            
+            // 좋아요 삭제
+            boardLikeRepository.deleteByBoardAndUser(boardLike.board,boardLike.user)
+            
+            return BoardResponse.fromEntity(board, false)
         }
         
         return BoardResponse.fromEntity(board, false)
