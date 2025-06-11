@@ -17,4 +17,5 @@ interface BoardService {
     fun likeBoard(boardId: UUID): BoardResponse
     fun unlikeBoard(boardId: UUID): BoardResponse
     fun getLikeStatus(boardId: UUID): Boolean
+    fun getFriendBoards(): BoardListResponse
 } 

@@ -52,6 +52,16 @@ class BoardController(
         )
     }
 
+    @GetMapping("/list/friends")
+    fun getFriendBoards(): ApiResponse<BoardListResponse> {
+        val response = boardService.getFriendBoards()
+        return ApiResponse(
+            status = "200 OK",
+            message = "친구의 게시글 목록 조회에 성공했습니다.",
+            data = response
+        )
+    }
+
     @GetMapping("/search")
     fun searchBoards(
         @RequestParam keyword: String

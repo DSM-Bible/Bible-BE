@@ -13,10 +13,10 @@ data class BoardPageResponse(
     val userName: String,
     val fileUrl: String?,
     val timestamp: LocalDate?,
-    val likeCount: Int
+    val likeCount: Int,
 ) {
     companion object {
-        fun fromEntity(boardEntity: BoardEntity): BoardPageResponse {
+        fun fromEntity(boardEntity: BoardEntity, isLiked: Boolean = false): BoardPageResponse {
             return BoardPageResponse(
                 id = boardEntity.id,
                 title = boardEntity.title,
@@ -24,13 +24,11 @@ data class BoardPageResponse(
                 userName = boardEntity.user.nickname,
                 fileUrl = boardEntity.fileUrl,
                 timestamp = boardEntity.timestamp,
-                likeCount = boardEntity.likeCount
+                likeCount = boardEntity.likeCount,
             )
         }
     }
 }
-
-
 
 data class BoardListResponse(
     val list: List<BoardPageResponse>,

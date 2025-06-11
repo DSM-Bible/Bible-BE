@@ -202,4 +202,17 @@ class BoardServiceImpl(
         
         return boardLikeRepository.existsByBoardAndUser(board, currentUser)
     }
+
+    @Transactional(readOnly = true)
+    override fun getFriendBoards(): BoardListResponse {
+        val currentUser = currentUserProvider.getCurrentUser()
+        val boards = boardRepository.findAllByFriends(currentUser)
+        
+        val boardResponses = boards.map { board ->
+            val isLiked = boardLikeRepository.existsByBoardAndUser(board, currentUser)
+            BoardPageResponse.fromEntity(board, isLiked)
+        }
+
+        return BoardListResponse(boardResponses)
+    }
 } 
