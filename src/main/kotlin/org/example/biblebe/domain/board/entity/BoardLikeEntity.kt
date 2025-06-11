@@ -15,11 +15,11 @@ class BoardLikeEntity(
     @Id
     val id: UUID = UUID.randomUUID(),
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
     @JoinColumn(name = "board_id", nullable = false)
     val board: BoardEntity,
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
     @JoinColumn(name = "user_id", nullable = false)
     val user: UserEntity,
 
