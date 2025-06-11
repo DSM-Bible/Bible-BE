@@ -43,21 +43,16 @@ class BoardController(
 
     @GetMapping("/list")
     fun getBoards(
+        @RequestParam selectType: Int = 1
     ): ApiResponse<BoardListResponse> {
-        val response = boardService.getBoards()
+        val response = when(selectType) {
+            1 -> boardService.getBoards()
+            2 -> boardService.getFriendBoards()
+            else -> boardService.getBoards()
+        }
         return ApiResponse(
             status = "200 OK",
-            message = "게시글 목록 조회에 성공했습니다.",
-            data = response
-        )
-    }
-
-    @GetMapping("/list/friends")
-    fun getFriendBoards(): ApiResponse<BoardListResponse> {
-        val response = boardService.getFriendBoards()
-        return ApiResponse(
-            status = "200 OK",
-            message = "친구의 게시글 목록 조회에 성공했습니다.",
+            message = if (selectType == 2) "친구의 게시글 목록 조회에 성공했습니다." else "게시글 목록 조회에 성공했습니다.",
             data = response
         )
     }
