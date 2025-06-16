@@ -23,7 +23,7 @@ class BoardEntity(
     val user: UserEntity,
 
     @Column
-    val fileUrl: String? = null,
+    val fileUrl: String = "https://songju-bucket.s3.ap-northeast-2.amazonaws.com/basicImg.png",
 
     val timestamp: LocalDate = LocalDate.now(),
 

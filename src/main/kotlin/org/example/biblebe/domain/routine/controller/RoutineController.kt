@@ -2,7 +2,6 @@ package org.example.biblebe.domain.routine.controller
 
 import jakarta.validation.Valid
 import org.example.biblebe.domain.routine.dto.request.CreateRoutineRequestDto
-import org.example.biblebe.domain.routine.dto.request.GetRoutineListRequestDto
 import org.example.biblebe.domain.routine.dto.request.UpdateRoutineRequestDto
 import org.example.biblebe.domain.routine.dto.response.GetRoutineDetailResponseDto
 import org.example.biblebe.domain.routine.dto.response.GetRoutineHistoryListDto
@@ -10,6 +9,7 @@ import org.example.biblebe.domain.routine.dto.response.GetRoutineListResponseDto
 import org.example.biblebe.domain.routine.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDate
 import java.util.UUID
 
 @RestController
@@ -47,11 +47,9 @@ class RoutineController (
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/list")
-    fun getRoutineList(
-        @Valid @RequestBody request: GetRoutineListRequestDto
-    ): GetRoutineListResponseDto {
-        return getRoutineListUseCase.execute(request)
+    @GetMapping("/list/{date}")
+    fun getRoutineList(@PathVariable date: LocalDate): GetRoutineListResponseDto {
+        return getRoutineListUseCase.execute(date)
     }
 
     @ResponseStatus(HttpStatus.OK)

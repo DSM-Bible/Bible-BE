@@ -1,6 +1,7 @@
 package org.example.biblebe.domain.todo.entity
 
 import jakarta.persistence.*
+import lombok.Getter
 import org.example.biblebe.domain.user.entity.UserEntity
 import org.hibernate.annotations.ColumnDefault
 import org.hibernate.annotations.DynamicInsert
@@ -8,6 +9,7 @@ import org.hibernate.annotations.DynamicUpdate
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.UUID
 
 @Entity(name = "todo")
@@ -27,7 +29,7 @@ class TodoEntity (
     var title: String,
 
     @Column(columnDefinition = "datetime", nullable = true)
-    var startTime: LocalDate,
+    var startTime: LocalDateTime,
 
 
     @ColumnDefault("'0'")

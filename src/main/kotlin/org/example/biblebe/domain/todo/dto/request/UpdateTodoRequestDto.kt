@@ -1,10 +1,12 @@
 package org.example.biblebe.domain.todo.dto.request
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.validation.constraints.NotBlank
 import org.hibernate.validator.constraints.Length
 import org.jetbrains.annotations.NotNull
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 data class UpdateTodoRequestDto(
         @field:NotBlank
@@ -12,8 +14,8 @@ data class UpdateTodoRequestDto(
         val title: String?,
 
         @field:NotNull
-        @field:DateTimeFormat(pattern = "yyyy-MM-dd")
-        val startTime: LocalDate?,
+        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
+        val startTime: LocalDateTime?,
 
         @field:NotNull
         val remind: Int?

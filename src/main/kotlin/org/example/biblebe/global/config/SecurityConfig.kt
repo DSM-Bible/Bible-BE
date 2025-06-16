@@ -39,14 +39,14 @@ class SecurityConfig(
                 authorize(HttpMethod.POST, "/calender", authenticated)
                 authorize(HttpMethod.PATCH, "/calender/{todoId}", authenticated)
                 authorize(HttpMethod.DELETE, "/calender/{todoId}", authenticated)
-                authorize(HttpMethod.GET, "/calender/list", authenticated)
-                authorize(HttpMethod.GET, "/calender/detail", authenticated)
+                authorize(HttpMethod.GET, "/calender/list/{date}", authenticated)
+                authorize(HttpMethod.GET, "/calender/detail/{todoId}", authenticated)
 
                 // routine
                 authorize(HttpMethod.POST, "/routine", authenticated)
                 authorize(HttpMethod.DELETE, "/routine/{routineId}", authenticated)
                 authorize(HttpMethod.PATCH, "/routine/{routineId}", authenticated)
-                authorize(HttpMethod.GET, "/routine/list", authenticated)
+                authorize(HttpMethod.GET, "/routine/list/{date}", authenticated)
                 authorize(HttpMethod.GET, "/routine/list/history", authenticated)
                 authorize(HttpMethod.GET, "/routine/detail/{routineId}", authenticated)
                 authorize(HttpMethod.POST, "/routine/start/{routineId}", authenticated)
@@ -56,6 +56,7 @@ class SecurityConfig(
                 authorize(HttpMethod.POST, "/board", authenticated)
                 authorize(HttpMethod.POST, "/board/**", authenticated)
                 authorize(HttpMethod.PATCH, "/board", authenticated)
+                authorize(HttpMethod.PATCH, "/board/edit/{boardId}", authenticated)
                 authorize(HttpMethod.DELETE, "/board/**", authenticated)
                 authorize(HttpMethod.GET, "/board/list", authenticated)
                 authorize(HttpMethod.GET, "/board/**", authenticated)
@@ -67,6 +68,8 @@ class SecurityConfig(
                 authorize(HttpMethod.GET, "/friend/list", authenticated)
                 authorize(HttpMethod.GET, "/friend/*", authenticated)
                 authorize(HttpMethod.PATCH, "/friend/acceptance", authenticated)
+
+                authorize("/error", permitAll)
 
                 authorize(anyRequest,denyAll)
             }
