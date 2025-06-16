@@ -40,7 +40,7 @@ class SecurityConfig(
                 authorize(HttpMethod.PATCH, "/calender/{todoId}", authenticated)
                 authorize(HttpMethod.DELETE, "/calender/{todoId}", authenticated)
                 authorize(HttpMethod.GET, "/calender/list", authenticated)
-                authorize(HttpMethod.GET, "/calender/detail", authenticated)
+                authorize(HttpMethod.GET, "/calender/detail/{todoId}", authenticated)
 
                 // routine
                 authorize(HttpMethod.POST, "/routine", authenticated)

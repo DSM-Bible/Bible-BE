@@ -4,21 +4,20 @@ import jakarta.validation.Valid
 import org.example.biblebe.domain.todo.dto.request.CreateTodoRequestDto
 import org.example.biblebe.domain.todo.dto.request.UpdateTodoRequestDto
 import org.example.biblebe.domain.todo.dto.response.GetTodoListResponseDto
-import org.example.biblebe.domain.todo.usecase.CreateTodoUseCase
-import org.example.biblebe.domain.todo.usecase.DeleteTodoUseCase
-import org.example.biblebe.domain.todo.usecase.GetTodoListUseCase
-import org.example.biblebe.domain.todo.usecase.UpdateTodoUseCase
+import org.example.biblebe.domain.todo.dto.response.TodoItemDto
+import org.example.biblebe.domain.todo.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
 @RequestMapping("/calender")
-class TodoController (
+class TodoController(
     private val createTodoUseCase: CreateTodoUseCase,
     private val deleteTodoUseCase: DeleteTodoUseCase,
     private val updateTodoUseCase: UpdateTodoUseCase,
-    private val getTodoListUseCase: GetTodoListUseCase
+    private val getTodoListUseCase: GetTodoListUseCase,
+    private val getTodoDetailUseCase: GetTodoDetailUseCase
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -46,5 +45,13 @@ class TodoController (
     @GetMapping("/list")
     fun getTodoList(): GetTodoListResponseDto {
         return getTodoListUseCase.execute()
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/detail/{todoId}")
+    fun getTodoDetail(
+        @PathVariable todoId: UUID
+    ): TodoItemDto {
+        return getTodoDetailUseCase.execute(todoId)
     }
 }

@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length
 import org.jetbrains.annotations.NotNull
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 data class CreateTodoRequestDto(
         @field:NotBlank
@@ -12,8 +13,8 @@ data class CreateTodoRequestDto(
         val title: String,
 
         @field:NotNull
-        @field:DateTimeFormat(pattern = "yyyy-MM-dd")
-        val startTime: LocalDate,
+        @field:DateTimeFormat(pattern = "yyyy-MM-ddThh:mm")
+        val startTime: LocalDateTime,
 
         @field:NotNull
         val remind: Int
