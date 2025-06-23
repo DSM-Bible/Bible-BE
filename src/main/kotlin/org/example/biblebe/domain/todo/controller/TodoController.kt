@@ -5,6 +5,7 @@ import org.example.biblebe.domain.todo.dto.request.CreateTodoRequestDto
 import org.example.biblebe.domain.todo.dto.request.UpdateTodoRequestDto
 import org.example.biblebe.domain.todo.dto.response.GetTodoDetailResponseDto
 import org.example.biblebe.domain.todo.dto.response.GetTodoListResponseDto
+
 import org.example.biblebe.domain.todo.usecase.*
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -13,7 +14,7 @@ import java.util.*
 
 @RestController
 @RequestMapping("/calender")
-class TodoController (
+class TodoController(
     private val createTodoUseCase: CreateTodoUseCase,
     private val deleteTodoUseCase: DeleteTodoUseCase,
     private val updateTodoUseCase: UpdateTodoUseCase,
@@ -53,4 +54,5 @@ class TodoController (
     fun getTodoList(@PathVariable todoId: UUID): GetTodoDetailResponseDto {
         return getTodoDetailUseCase.execute(todoId)
     }
+
 }

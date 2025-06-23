@@ -39,6 +39,7 @@ class SecurityConfig(
                 authorize(HttpMethod.POST, "/calender", authenticated)
                 authorize(HttpMethod.PATCH, "/calender/{todoId}", authenticated)
                 authorize(HttpMethod.DELETE, "/calender/{todoId}", authenticated)
+
                 authorize(HttpMethod.GET, "/calender/list/{date}", authenticated)
                 authorize(HttpMethod.GET, "/calender/detail/{todoId}", authenticated)
 
