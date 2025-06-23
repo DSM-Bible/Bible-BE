@@ -14,7 +14,7 @@ data class UpdateTodoRequestDto(
         val title: String?,
 
         @field:NotNull
-        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
+        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
         val startTime: LocalDateTime?,
 
         @field:NotNull
