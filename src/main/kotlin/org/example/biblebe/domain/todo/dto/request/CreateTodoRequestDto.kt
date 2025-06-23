@@ -13,7 +13,7 @@ data class CreateTodoRequestDto(
         val title: String,
 
         @field:NotNull
-        @field:DateTimeFormat(pattern = "yyyy-MM-ddThh:mm")
+        @field:DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
         val startTime: LocalDateTime,
 
         @field:NotNull
