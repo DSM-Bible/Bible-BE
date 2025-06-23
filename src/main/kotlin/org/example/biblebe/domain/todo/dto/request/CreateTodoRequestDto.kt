@@ -1,5 +1,6 @@
 package org.example.biblebe.domain.todo.dto.request
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.validation.constraints.NotBlank
 import org.hibernate.validator.constraints.Length
 import org.jetbrains.annotations.NotNull
@@ -13,7 +14,7 @@ data class CreateTodoRequestDto(
         val title: String,
 
         @field:NotNull
-        @field:DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
+        @field:JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
         val startTime: LocalDateTime,
 
         @field:NotNull

@@ -1,5 +1,6 @@
 package org.example.biblebe.domain.user.dto.response
 
 data class LoginResponseDto (
-    val token: String
+    val token: String,
+    val userId: String
 )

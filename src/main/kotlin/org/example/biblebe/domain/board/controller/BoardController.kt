@@ -69,7 +69,7 @@ class BoardController(
         )
     }
 
-    @PatchMapping(value = ["/{boardId}"], consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
+    @PatchMapping(value = ["/edit/{boardId}"], consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     fun updateBoard(
         @PathVariable boardId: UUID,
         @RequestPart("request") @Valid request: BoardRequest,

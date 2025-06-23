@@ -1,6 +1,7 @@
 package org.example.biblebe.domain.todo.entity
 
 import jakarta.persistence.*
+import lombok.Getter
 import org.example.biblebe.domain.user.entity.UserEntity
 import org.hibernate.annotations.ColumnDefault
 import org.hibernate.annotations.DynamicInsert

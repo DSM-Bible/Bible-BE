@@ -21,6 +21,6 @@ class LoginUseCase(
 
         securityService.checkPasswordMatches(request.password, user.password)
 
-        return LoginResponseDto(jwtTokenProvider.createToken(user.userId))
+        return LoginResponseDto(jwtTokenProvider.createToken(user.userId), user.userId)
     }
 }
