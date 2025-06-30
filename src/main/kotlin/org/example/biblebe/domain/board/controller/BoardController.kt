@@ -1,6 +1,7 @@
 package org.example.biblebe.domain.board.controller
 
 import jakarta.validation.Valid
+import lombok.extern.slf4j.Slf4j
 import org.example.biblebe.domain.board.dto.BoardListResponse
 import org.example.biblebe.domain.board.dto.BoardRequest
 import org.example.biblebe.domain.board.dto.BoardResponse
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import java.util.UUID
 
+@Slf4j
 @RestController
 @RequestMapping("/board")
 class BoardController(
@@ -24,6 +26,7 @@ class BoardController(
         @RequestPart("file", required = false) file: MultipartFile?
     ): ApiResponse<BoardResponse> {
         val response = boardService.createBoard(request, file)
+        println("Created board: $response")
         return ApiResponse(
             status = "200 OK",
             message = "게시글이 성공적으로 등록되었습니다.",
